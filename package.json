@@ -1,5 +1,5 @@
 {
-    "name": "pdf-parse-2",
+    "name": "@mmaaikel/pdf-parse",
     "version": "2.0.0",
     "description": "Pure javascript cross-platform module to extract text from PDFs.",
     "main": "index.js",
