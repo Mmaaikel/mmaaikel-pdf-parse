@@ -1,6 +1,6 @@
 {
     "name": "@mmaaikel/pdf-parse",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Pure javascript cross-platform module to extract text from PDFs.",
     "main": "index.js",
     "keywords": [
@@ -32,16 +32,15 @@
         "test": "node node_modules/mocha/bin/_mocha --recursive --slow 10000",
         "start": "node index.js"
     },
-    "homepage": "https://gitlab.com/autokent/pdf-parse",
+    "homepage": "https://github.com/Mmaaikel/mmaaikel-pdf-parse",
     "bugs": {
-        "url": "https://gitlab.com/autokent/pdf-parse/issues",
-        "email": "mehmet.kozan@live.com"
+        "url": "https://github.com/Mmaaikel/mmaaikel-pdf-parse/issues",
     },
     "repository": {
         "type": "git",
-        "url": "https://gitlab.com/autokent/pdf-parse.git"
+        "url": "https://github.com/Mmaaikel/mmaaikel-pdf-parse.git"
     },
-    "author": "Mehmet Kozan <mehmet.kozan@live.com>",
+    "author": "Mmaaikel",
     "license": "MIT",
     "engines": {
         "node": ">=6.8.1"
