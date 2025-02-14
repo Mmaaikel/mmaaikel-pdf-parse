@@ -56,3 +56,8 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# editor
+.idea/
+
+test/data/*.txt

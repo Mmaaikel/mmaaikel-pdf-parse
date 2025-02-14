@@ -1,6 +1,6 @@
-const assert = require('assert');
-const PDF = require('..');
-const fs = require('fs');
+import assert from 'assert'
+import fs from 'fs'
+import PdfParse from '../index.js'
 
 // to test another valid pdf file just change this 5 constants.
 const PDF_FILE = './test/data/03-invalid.pdf';
@@ -18,7 +18,7 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
             version: VERSION
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
                 assert.err("should throw error.");
             })
             .catch(function(err) {
@@ -27,14 +27,14 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
             });
     });
 
-    it('should pass parse with option pagerender:null', function() {
+    it('should pass parse with option pageRender:null', function() {
         let options = {
             version: VERSION,
-            pagerender: null,
+            pageRender: null,
             max: 0
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             assert.err("should throw error.");
         }).catch(function(err) {
             assert.notEqual(err, null);
@@ -43,13 +43,13 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
     });
 
 
-    it('should pass parse with option pagerender:undefined', function() {
+    it('should pass parse with option pageRender:undefined', function() {
         let options = {
             version: VERSION,
             max: 0
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             assert.err("should throw error.");
         }).catch(function(err) {
             assert.notEqual(err, null);
@@ -64,7 +64,7 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
             max: -1
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             assert.err("should throw error.");
         }).catch(function(err) {
             assert.notEqual(err, null);
@@ -83,10 +83,10 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
             assert.err("should throw error.");
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 assert.err("should throw error.");
             });
         }).catch(function(err) {
@@ -120,18 +120,18 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
         let options_01 = {
             version: VERSION,
             max: PDF_PAGE_COUNT - 1,
-            pagerender: render_page
+            pageRender: render_page
         };
 
         let options_02 = {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
             assert.err("should throw error.");
 
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 assert.err("should throw error.");
             });
         }).catch(function(err) {
@@ -166,18 +166,18 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION} ps: should all throw error.
         let options_01 = {
             version: VERSION,
             max: PDF_PAGE_COUNT - 1,
-            pagerender: render_page
+            pageRender: render_page
         };
 
         let options_02 = {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
             assert.err("should throw error.");
 
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 assert.err("should throw error.");
             });
         }).catch(function(err) {

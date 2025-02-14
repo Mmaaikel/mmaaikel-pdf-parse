@@ -1,6 +1,6 @@
-const assert = require('assert');
-const PDF = require('../');
-const fs = require('fs');
+import assert from 'assert'
+import fs from 'fs'
+import PdfParse from '../index.js'
 
 // to test another valid pdf file just change this 5 constants.
 const PDF_FILE = './test/data/01-valid.pdf';
@@ -18,30 +18,30 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             fs.writeFileSync(`${PDF_FILE}.txt`, data.text, {
                 encoding: 'utf8',
                 flag: 'w'
             });
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
         });
     });
 
-    it('should pass parse with option pagerender:null', function() {
+    it('should pass parse with option pageRender:null', function() {
         let options = {
             version: VERSION,
-            pagerender: null,
+            pageRender: null,
             max: 0
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
@@ -49,16 +49,16 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
     });
 
 
-    it('should pass parse with option pagerender:undefined', function() {
+    it('should pass parse with option pageRender:undefined', function() {
         let options = {
             version: VERSION,
             max: 0
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
@@ -72,10 +72,10 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
             max: -1
         };
 
-        return PDF(dataBuffer, options).then(function(data) {
+        return PdfParse(dataBuffer, options).then(function(data) {
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
@@ -93,19 +93,19 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
 
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT - 1);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT - 1);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.notEqual(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-                assert.equal(data.numpages, PDF_PAGE_COUNT);
-                assert.equal(data.numrender, PDF_PAGE_COUNT);
+                assert.equal(data.numPages, PDF_PAGE_COUNT);
+                assert.equal(data.numRender, PDF_PAGE_COUNT);
                 assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
                 assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
                 assert.notEqual(data.info, null);
@@ -130,10 +130,10 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
                     for (let item of textContent.items) {
                         if (lastY == item.transform[5] || !lastY){
                             text += item.str;
-                        }  
+                        }
                         else{
                             text += '\n' + item.str;
-                        }    
+                        }
                         lastY = item.transform[5];
                     }
                     return text;
@@ -143,26 +143,26 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
         let options_01 = {
             version: VERSION,
             max: PDF_PAGE_COUNT - 1,
-            pagerender: render_page
+            pageRender: render_page
         };
 
         let options_02 = {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
 
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT - 1);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT - 1);
             assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
             assert.notEqual(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-                assert.equal(data.numpages, PDF_PAGE_COUNT);
-                assert.equal(data.numrender, PDF_PAGE_COUNT);
+                assert.equal(data.numPages, PDF_PAGE_COUNT);
+                assert.equal(data.numRender, PDF_PAGE_COUNT);
                 assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
                 assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
                 assert.notEqual(data.info, null);
@@ -187,10 +187,10 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
                     for (let item of textContent.items) {
                         if (lastY == item.transform[5] || !lastY){
                             text += item.str;
-                        }  
+                        }
                         else{
                             text += '\n' + item.str;
-                        }    
+                        }
                         lastY = item.transform[5];
                     }
                     return 'modified callback';
@@ -200,26 +200,26 @@ describe(`File:${PDF_FILE} PDF.js Version:${VERSION}`, function() {
         let options_01 = {
             version: VERSION,
             max: PDF_PAGE_COUNT - 1,
-            pagerender: render_page
+            pageRender: render_page
         };
 
         let options_02 = {
             version: VERSION
         };
 
-        return PDF(dataBuffer, options_01).then(function(data) {
+        return PdfParse(dataBuffer, options_01).then(function(data) {
 
             //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-            assert.equal(data.numpages, PDF_PAGE_COUNT);
-            assert.equal(data.numrender, PDF_PAGE_COUNT - 1);
+            assert.equal(data.numPages, PDF_PAGE_COUNT);
+            assert.equal(data.numRender, PDF_PAGE_COUNT - 1);
             assert.equal(data.text.includes('modified callback'), true);
             assert.notEqual(data.text.includes(LAST_PAGE_TEXT), true);
             assert.notEqual(data.info, null);
         }).then(function() {
-            return PDF(dataBuffer, options_02).then(function(data) {
+            return PdfParse(dataBuffer, options_02).then(function(data) {
                 //fs.writeFileSync('./data/01-test.txt', data.text, 'utf8');
-                assert.equal(data.numpages, PDF_PAGE_COUNT);
-                assert.equal(data.numrender, PDF_PAGE_COUNT);
+                assert.equal(data.numPages, PDF_PAGE_COUNT);
+                assert.equal(data.numRender, PDF_PAGE_COUNT);
                 assert.equal(data.text.includes(FIST_PAGE_TEXT), true);
                 assert.equal(data.text.includes(LAST_PAGE_TEXT), true);
                 assert.notEqual(data.info, null);
